@@ -1,0 +1,22 @@
+{
+  "name": "mithril-webapp",
+  "version": "0.0.0",
+  "homepage": "https://github.com/jonnyandreola/mithril-webapp",
+  "authors": [
+    "Jonny Andreola <jonnyandreola@gmail.com>"
+  ],
+  "description": "Simple weather app to test and practice with mithil",
+  "main": "index.html",
+  "keywords": [
+    "mithil"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
