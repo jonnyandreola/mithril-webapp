@@ -57,7 +57,7 @@ gulp.task('vendor', function(){
  * Concatenates all application scripts in assets/js folder
  */
 gulp.task('script', function(){
-    return gulp.src('app/**/*.js'])
+    return gulp.src('app/**/*.js')
     .pipe($.jshint())
     .pipe($.jshint.reporter('default'))
     .pipe($.concat('app.js'))
@@ -73,24 +73,12 @@ gulp.task('script', function(){
  * Compile style
  */
 gulp.task('style', function() {
-    return gulp.src(PATH.src.sass + '/main.sass')
-    .pipe($.sass({
-        'style': 'expanded',
-        'sourcemap=none': true,
-        'container':'jandreola-gulp-ruby-sass'
-    }))
+    return $.sass('./content/sass/main.sass', {
+        'style': 'expanded'
+    })
     .pipe($.autoprefix('last 2 versions', '> 1%', 'ie 8'))
     .pipe($.size({title: 'CSS: '}))
-    .pipe(gulp.dest(PATH['public'].root));
-});
-
-
-////////////
-// Images //
-////////////
-gulp.task('image', function(){
-    return gulp.src(PATH.src.img + '/**/*.{jpg,jpeg,png,svg}')
-        .pipe(gulp.dest(PATH['public'].img));
+    .pipe(gulp.dest('./main.css'));
 });
 
 
@@ -117,11 +105,11 @@ gulp.task('serve', function (cb) {
 /**
  * Sets watchers and triggers appropriate tasks
  */
-gulp.task('default', ['index'], function() {
+gulp.task('default', ['script', 'style', 'serve'], function() {
 
     // Watch for scripts changes
-    gulp.watch(PATH.src.js + '/**/*.js', ['script']);
+    gulp.watch('./**/*.js', ['script']);
 
     // Watch for SASS changes
-    gulp.watch([PATH.src.sass + '/**/*.sass'], ['style']);
+    gulp.watch('./**/*.sass', ['style']);
 });
