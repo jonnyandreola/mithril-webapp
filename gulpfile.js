@@ -73,11 +73,7 @@ gulp.task('script', function(){
  * Compile style
  */
 gulp.task('style', function() {
-    return $.sass('./content/sass/main.sass', {
-        'style': 'expanded'
-    })
-    .pipe($.autoprefix('last 2 versions', '> 1%', 'ie 8'))
-    .pipe($.size({title: 'CSS: '}))
+    return $.sass('./content/sass/main.sass')
     .pipe(gulp.dest('./main.css'));
 });
 
@@ -105,11 +101,11 @@ gulp.task('serve', function (cb) {
 /**
  * Sets watchers and triggers appropriate tasks
  */
-gulp.task('default', ['script', 'style', 'serve'], function() {
+gulp.task('default', ['script', 'vendor', 'serve'], function() {
 
     // Watch for scripts changes
     gulp.watch('./**/*.js', ['script']);
 
     // Watch for SASS changes
-    gulp.watch('./**/*.sass', ['style']);
+    // gulp.watch('./**/*.sass', ['style']);
 });
